@@ -1,5 +1,5 @@
 (()=>{
-const cache=new Map(),colors=['#3c7868','#637da3','#a27e48','#976f8a'];let shapes=[],candidates=[],selected='sp',loading=false,started=false,lastCheck='';
+const cache=new Map(),colors=['#cf4545','#637da3','#a27e48','#976f8a'];let shapes=[],candidates=[],selected='sp',loading=false,started=false,lastCheck='';
 const mode=()=>$('map-mode').value;
 const cname=c=>title(c.nmu||c.nm);
 function color(n){return colors[Math.max(0,candidates.findIndex(c=>c.n===n))%colors.length];}
@@ -15,4 +15,5 @@ fetch('mapa-uf.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=
 window.addEventListener('languagechange',()=>{paint();for(const option of $('map-mode').options){const c=candidates.find(c=>c.n===option.value);if(c)option.textContent=translateText(cname(c)+' · % dos votos válidos');}$('map-updated').textContent=translateText(lastCheck||'Carregando dados das 27 UFs…');$('map-svg').querySelector('svg')?.setAttribute('aria-label',translateText('Percentuais por unidade da federação'));});
 setInterval(()=>{const rect=$('mapa').getBoundingClientRect();if(started&&!document.hidden&&$('auto').checked&&rect.bottom>0&&rect.top<window.innerHeight)load();},60000);
 })();
+
 

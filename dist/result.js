@@ -51,5 +51,6 @@ function validateElectionData(d,{region,city=''}){
 
 function candidateColor(number,d){
   const order=candidateList(d).map(c=>c.n).sort((a,b)=>num(a)-num(b));
-  return ['#3c7868','#637da3'][Math.max(0,order.indexOf(number))];
+  return ['#cf4545','#637da3'][Math.max(0,order.indexOf(number))];
 }
+
