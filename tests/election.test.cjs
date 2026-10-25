@@ -5,6 +5,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.join(__dirname,'../dist');
 const context=vm.createContext({});
+vm.runInContext(fs.readFileSync(path.join(root,'i18n.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'app.js'),'utf8').split('function clearView')[0],context);
 vm.runInContext(fs.readFileSync(path.join(root,'result.js'),'utf8'),context);
 function fixture(a=510,b=490,extra={},candidate={}){

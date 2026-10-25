@@ -60,3 +60,7 @@ tests/              Testes automatizados
 ```
 
 Este projeto está configurado para uma eleição específica; para outro ano ou cargo, atualize e valide os identificadores, a documentação, o cadastro e as regras. Não representa o TSE. Consulte os [resultados oficiais](https://resultados.tse.jus.br/oficial/app/index.html).
+
+## Tema e idioma
+
+Os controles no cabeçalho alternam entre português/inglês e tema claro/escuro. O idioma inicial é português; o tema inicial acompanha a preferência do sistema. As escolhas são salvas localmente no navegador (chaves `urna-language` e `urna-theme`). Quando o armazenamento é bloqueado, os controles continuam funcionando durante a visita. Dados e nomes oficiais do TSE são preservados; números e textos da interface acompanham o idioma.

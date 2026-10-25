@@ -24,8 +24,8 @@ function electionResult(d){
   }else{message+=' A Presidência é definida pelo total nacional, incluindo o exterior.';}
   return {list,total,margin,pointMargin,national,winner,heading,message};
 }
-function voteMarginHTML(d){const r=electionResult(d);if(r.margin===null)return '<div class="vote-margin">Diferença de votos indisponível.</div>';const pp=r.pointMargin.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});return `<div class="vote-margin"><span>DIFERENÇA ENTRE OS CANDIDATOS</span><strong>${fmt(r.margin)} votos <small>· ${pp} p.p.</small></strong><p>${r.total===0?'Sem votos apurados; não há liderança.':r.margin===0?'Empate na votação apurada.':`${safe(title(r.list[0].nmu||r.list[0].nm))} à frente de ${safe(title(r.list[1].nmu||r.list[1].nm))}.`}</p></div>`;}
-function outcomeHTML(d){const r=electionResult(d);return `<div class="election-outcome${r.winner?' confirmed':''}"><span>${safe(r.heading)}</span><p>${safe(r.message)}</p></div>`;}
+function voteMarginHTML(d){const r=electionResult(d);if(r.margin===null)return localizeHTML('<div class="vote-margin">Diferença de votos indisponível.</div>');const pp=r.pointMargin.toLocaleString(uiLocale(),{minimumFractionDigits:2,maximumFractionDigits:2});return localizeHTML(`<div class="vote-margin"><span>DIFERENÇA ENTRE OS CANDIDATOS</span><strong>${fmt(r.margin)} votos <small>· ${pp} p.p.</small></strong><p>${r.total===0?'Sem votos apurados; não há liderança.':r.margin===0?'Empate na votação apurada.':`${safe(title(r.list[0].nmu||r.list[0].nm))} à frente de ${safe(title(r.list[1].nmu||r.list[1].nm))}.`}</p></div>`); }
+function outcomeHTML(d){const r=electionResult(d);return localizeHTML(`<div class="election-outcome${r.winner?' confirmed':''}"><span>${safe(r.heading)}</span><p>${safe(r.message)}</p></div>`);}
 
 // Reject incomplete, simulated, other-election or other-locality files instead
 // of rendering absent fields as zero or displaying an unrelated result.
