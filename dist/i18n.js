@@ -83,6 +83,12 @@ function localizeHTML(html){return String(html).replace(/(^|>)([^<>]+)(?=<|$)/g,
 
 function readPreference(key){try{return localStorage.getItem(key);}catch{return null;}}
 function savePreference(key,value){try{localStorage.setItem(key,value);}catch{/* Preferences still work when storage is blocked. */}}
+function themeIcon(theme){
+  const shape=theme==='dark'
+    ?'<path d="M20.9 13.2A8.8 8.8 0 0 1 10.8 3.1 8.9 8.9 0 1 0 20.9 13.2Z"/>'
+    :'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>';
+  return '<svg class="preference-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+shape+'</svg>';
+}
 function setTheme(theme,persist=true){
   uiTheme=theme==='dark'?'dark':'light';
   if(typeof document!=='undefined'){
@@ -90,7 +96,14 @@ function setTheme(theme,persist=true){
     document.documentElement.style.colorScheme=uiTheme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content',uiTheme==='dark'?'#101c19':'#f5f6f0');
     const button=document.getElementById('theme-toggle');
-    if(button){button.setAttribute('aria-pressed',String(uiTheme==='dark'));button.setAttribute('aria-label',translateText('Alternar tema'));button.textContent=(uiTheme==='dark'?'☾ ':'☀ ')+translateText(uiTheme==='dark'?'Escuro':'Claro');}
+    if(button){
+      button.setAttribute('aria-pressed',String(uiTheme==='dark'));
+      button.setAttribute('aria-label',translateText('Alternar tema'));
+      button.innerHTML=themeIcon(uiTheme);
+      const label=document.createElement('span');
+      label.textContent=translateText(uiTheme==='dark'?'Escuro':'Claro');
+      button.appendChild(label);
+    }
   }
   if(persist)savePreference('urna-theme',uiTheme);
 }
