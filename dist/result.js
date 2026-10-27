@@ -65,12 +65,4 @@ function countedVotes(d,now=Date.now()){
   return /^[0-9]+$/.test(String(value))&&Number.isSafeInteger(Number(value))?Number(value):null;
 }
 
-function isNationalTab(value){return value==='geral'||value==='totalizacao';}
-function isPost17Publication(d,now=Date.now()){
-  if(!totalsReleased(now)||d?.f!=='o'||d.ele!=='6258'||d.t!=='2'||d.dv!=='s'||d.tpabr!=='br'||d.cdabr!=='br')return false;
-  const date=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(d.dg||'');
-  if(!date||!/^\d{2}:\d{2}:\d{2}$/.test(d.hg||''))return false;
-  const timestamp=Date.parse(`${date[3]}-${date[2]}-${date[1]}T${d.hg}-03:00`);
-  return Number.isFinite(timestamp)&&totalsReleased(timestamp);
-}
-
+function isNationalTab(value){return value==='geral';}

@@ -1,0 +1,21 @@
+{
+  "kind": "votes_cast_after_17",
+  "electionYear": 2026,
+  "round": 2,
+  "electionDate": "2026-10-25",
+  "timeZone": "America/Sao_Paulo",
+  "scope": "BR",
+  "unit": "recorded_votes",
+  "total": 34393,
+  "bands": [
+    {"id": "17-18", "label": "17h–18h", "votes": 32399},
+    {"id": "18-19", "label": "18h–19h", "votes": 1981},
+    {"id": "after-19", "label": "Após as 19h", "votes": 13}
+  ],
+  "source": {
+    "publisher": "Tribunal Superior Eleitoral",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/eleicoes-2026-mais-de-34-mil-votos-foram-registrados-apos-as-17h-no-2o-turno",
+    "publishedAt": "2026-10-27T15:21:00-03:00",
+    "updatedAt": "2026-10-27T15:45:00-03:00"
+  }
+}

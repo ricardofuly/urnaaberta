@@ -1,6 +1,27 @@
 let uiLanguage='pt';
 let uiTheme='light';
 const english={
+  'Votação após as 17h':'Voting after 5 p.m.',
+  'VOTAÇÃO · RECORTE POR HORÁRIO':'VOTING · BREAKDOWN BY TIME',
+  'Votos registrados após as 17h':'Votes recorded after 5 p.m.',
+  'Votos registrados depois das 17h de Brasília no 2º turno de 25/10/2026, conforme levantamento específico do TSE.':'Votes recorded after 5 p.m. Brasília time in the October 25, 2026 runoff, according to a dedicated TSE report.',
+  'Abrangência: território nacional. Não inclui o exterior. A fonte não apresenta distribuição desses votos por candidato.':'Coverage: Brazilian territory, excluding votes abroad. The source does not provide a candidate breakdown for these votes.',
+  'Total após as 17h':'Total after 5 p.m.',
+  'Votos registrados, segundo o levantamento do TSE':'Votes recorded, according to the TSE report',
+  'Consultando levantamento oficial…':'Loading the official report…',
+  'Votos por faixa de horário':'Votes by time range',
+  'Das 17h às 18h':'5 p.m. to 6 p.m.',
+  'Das 18h às 19h':'6 p.m. to 7 p.m.',
+  'Após as 19h':'After 7 p.m.',
+  'votos registrados':'recorded votes',
+  'Levantamento publicado pelo TSE em 27/10/2026. Estes dados não são o total geral da eleição nem o total divulgado após as 17h.':'Report published by the TSE on October 27, 2026. These figures are not the overall election total or the total results released after 5 p.m.',
+  'A unidade informada pela fonte é votos registrados. Este painel não apresenta uma contagem independente de pessoas únicas.':'The source measures recorded votes. This dashboard does not provide an independent count of unique individuals.',
+  'Consultar levantamento oficial do TSE ↗':'Read the official TSE report ↗',
+  '↓ Baixar levantamento em JSON':'↓ Download report JSON',
+  'Atualização do levantamento':'Report updated',
+  'Levantamento do TSE':'TSE report',
+  'Recorte de votos registrados após as 17h. Fonte: levantamento do TSE, publicado em 27/10/2026.':'Votes recorded after 5 p.m. Source: TSE report published on October 27, 2026.',
+  'Não foi possível carregar o levantamento de votos após as 17h.':'The report on votes recorded after 5 p.m. could not be loaded.',
   'Após as 17h':'After 5 p.m.',
   'Brasil + exterior · após as 17h':'Brazil + abroad · after 5 p.m.',
   'Totalização oficial após as 17h':'Official count after 5 p.m.',
@@ -133,7 +154,7 @@ function captureStaticTranslations(){
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   let node;
   while((node=walker.nextNode())){
-    if(!node.parentElement.closest('script,style,svg,.brand,#candidates,#election-summary,#map-svg,#map-legend,#map-detail,#map-thead,#map-tbody,#post17-total,#post17-date,#total,#total-note,#scope,#notice,#checked,#status,#generated,#city,#uf,#states,#search-results,#map-updated')&&node.textContent.trim())staticText.push({node,source:node.textContent});
+    if(!node.parentElement.closest('script,style,svg,.brand,#candidates,#election-summary,#map-svg,#map-legend,#map-detail,#map-thead,#map-tbody,#post17-total,#post17-date,#late17,#late18,#late19,#total,#total-note,#scope,#notice,#checked,#status,#generated,#city,#uf,#states,#search-results,#map-updated')&&node.textContent.trim())staticText.push({node,source:node.textContent});
   }
   document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{
     for(const attribute of ['placeholder','aria-label','title'])if(el.hasAttribute(attribute))staticAttributes.push({el,attribute,source:el.getAttribute(attribute)});
