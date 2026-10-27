@@ -38,7 +38,7 @@ function validateElectionData(d,{region,city=''}){
     d.tpabr!==expectedType||String(d.cdabr).toLowerCase()!==expectedCode||
     !['n','p','f'].includes(d.and)||!d.s||!d.v||!d.e||
     !integer(d.s.ts)||!integer(d.s.st)||num(d.s.st)>num(d.s.ts)||!percent(d.s.pst)||
-    !integer(d.v.vv)||!integer(d.v.vb)||!integer(d.v.tvn??d.v.vn)||!integer(d.e.a)){
+    !integer(d.v.tv)||!integer(d.v.vv)||!integer(d.v.vb)||!integer(d.v.tvn??d.v.vn)||!integer(d.e.a)){
     throw Error('Arquivo oficial incompleto ou de outra abrangência');
   }
   const list=candidateList(d);
@@ -52,5 +52,16 @@ function validateElectionData(d,{region,city=''}){
 function candidateColor(number,d){
   const order=candidateList(d).map(c=>c.n).sort((a,b)=>num(a)-num(b));
   return ['#cf4545','#637da3'][Math.max(0,order.indexOf(number))];
+}
+
+// Release time of this election, expressed with Brasília's UTC−3 offset.
+// Once released, totals stay visible on the following days as well.
+function totalsReleased(now=Date.now()){
+  return Number(now)>=Date.parse('2026-10-25T17:00:00-03:00');
+}
+function countedVotes(d,now=Date.now()){
+  if(!totalsReleased(now))return null;
+  const value=d?.v?.tv;
+  return /^[0-9]+$/.test(String(value))&&Number.isSafeInteger(Number(value))?Number(value):null;
 }
 

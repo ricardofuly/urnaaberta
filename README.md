@@ -64,3 +64,7 @@ Este projeto está configurado para uma eleição específica; para outro ano ou
 ## Tema e idioma
 
 Os controles no cabeçalho alternam entre português/inglês e tema claro/escuro. O idioma inicial é português; o tema inicial acompanha a preferência do sistema. As escolhas são salvas localmente no navegador (chaves `urna-language` e `urna-theme`). Quando o armazenamento é bloqueado, os controles continuam funcionando durante a visita. Dados e nomes oficiais do TSE são preservados; números e textos da interface acompanham o idioma.
+
+## Total de votos apurados
+
+O cartão de total, os detalhes do mapa e a tabela das UFs usam o campo oficial `v.tv` do TSE, incluindo válidos, brancos e nulos, e acompanham a localidade selecionada. A exibição é liberada a partir de 25/10/2026 às 17h de Brasília (UTC−3), permanecendo disponível nos dias seguintes. Zero votos é exibido como zero; um campo ausente é tratado como dado indisponível.

@@ -9,7 +9,7 @@ vm.runInContext(fs.readFileSync(path.join(root,'i18n.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'app.js'),'utf8').split('function clearView')[0],context);
 vm.runInContext(fs.readFileSync(path.join(root,'result.js'),'utf8'),context);
 function fixture(a=510,b=490,extra={},candidate={}){
-  return {tpabr:'br',cdabr:'br',ele:'6258',t:'2',f:'o',dv:'s',tf:'n',and:'p',s:{ts:'100',st:'20',pst:'20,00'},v:{vv:String(a+b),vb:'2',tvn:'3'},e:{a:'4'},...extra,carg:[{cd:'1',agr:[{par:[
+  return {tpabr:'br',cdabr:'br',ele:'6258',t:'2',f:'o',dv:'s',tf:'n',and:'p',s:{ts:'100',st:'20',pst:'20,00'},v:{tv:String(a+b+5),vv:String(a+b),vb:'2',tvn:'3'},e:{a:'4'},...extra,carg:[{cd:'1',agr:[{par:[
     {sg:'A',cand:[{n:'13',nmu:'Candidato A',vap:String(a),pvap:String(a/(a+b||1)*100),e:'n',...candidate}]},
     {sg:'B',cand:[{n:'22',nmu:'Candidato B',vap:String(b),pvap:String(b/(a+b||1)*100),e:'n'}]}
   ]}]}]};
@@ -82,3 +82,7 @@ test('documento referencia apenas arquivos locais existentes e não duplica IDs'
   for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){const p=match[1];if(!/^(https?:|data:)/.test(p)&&p!=='./')assert.ok(fs.existsSync(path.join(root,p)),p);}
   assert.ok(html.indexOf('src="result.js"')<html.indexOf('src="app.js"'));
 });
+
+test('total fica oculto antes das 17h de Brasília e é liberado exatamente às 17h',()=>{const d=fixture();assert.equal(context.countedVotes(d,Date.parse('2026-10-25T16:59:59-03:00')),null);assert.equal(context.countedVotes(d,Date.parse('2026-10-25T17:00:00-03:00')),1005);});
+test('total usa o campo tv do TSE e permanece disponível nos dias seguintes',()=>{const d=fixture();d.v.tv='2000';assert.equal(context.countedVotes(d,Date.parse('2026-10-27T08:00:00-03:00')),2000);});
+test('total zero é distinto de total ausente',()=>{const d=fixture(0,0);d.v.tv='0';assert.equal(context.countedVotes(d,Date.parse('2026-10-25T21:00:00Z')),0);delete d.v.tv;assert.equal(context.countedVotes(d,Date.parse('2026-10-25T21:00:00Z')),null);assert.throws(()=>validate(d));});
