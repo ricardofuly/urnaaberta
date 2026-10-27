@@ -68,3 +68,7 @@ Os controles no cabeçalho alternam entre português/inglês e tema claro/escuro
 ## Total de votos apurados
 
 O cartão de total, os detalhes do mapa e a tabela das UFs usam o campo oficial `v.tv` do TSE, incluindo válidos, brancos e nulos, e acompanham a localidade selecionada. A exibição é liberada a partir de 25/10/2026 às 17h de Brasília (UTC−3), permanecendo disponível nos dias seguintes. Zero votos é exibido como zero; um campo ausente é tratado como dado indisponível.
+
+## Categoria Após as 17h
+
+A aba separada "Após as 17h" consulta exclusivamente o total nacional oficial, incluindo o exterior, e mostra o total acumulado, candidatos e andamento da apuração. Somente arquivos gerados pelo TSE em ou após 25/10/2026 às 17h de Brasília são exibidos nessa categoria. Arquivos de preparação anteriores ao horário geram uma mensagem de espera. A categoria representa a divulgação da totalização, não o horário em que os eleitores votaram nem um cálculo de diferenças entre snapshots históricos.

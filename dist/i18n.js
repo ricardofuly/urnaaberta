@@ -1,6 +1,14 @@
 let uiLanguage='pt';
 let uiTheme='light';
 const english={
+  'Após as 17h':'After 5 p.m.',
+  'Brasil + exterior · após as 17h':'Brazil + abroad · after 5 p.m.',
+  'Totalização oficial após as 17h':'Official count after 5 p.m.',
+  'Totalização após as 17h':'Vote count after 5 p.m.',
+  'DIVULGAÇÃO OFICIAL · HORÁRIO DE BRASÍLIA':'OFFICIAL RESULTS · BRASÍLIA TIME',
+  'Totais acumulados divulgados pelo TSE a partir de 25/10/2026, às 17h de Brasília. Inclui Brasil e exterior.':'Cumulative totals published by the TSE from October 25, 2026, at 5 p.m. Brasília time. Includes Brazil and votes abroad.',
+  'Esta categoria acompanha a divulgação da apuração; não filtra o horário em que cada eleitor votou.':'This category follows the publication of vote counts; it does not filter the time at which individual voters cast their ballots.',
+  'Aguardando arquivo divulgado após as 17h.':'Awaiting a file published after 5 p.m.',
   'Total de votos apurados':'Total votes counted','Válidos, brancos e nulos':'Valid, blank and invalid votes','Disponível a partir das 17h de Brasília':'Available from 5 p.m. Brasília time',
   'Urna Aberta · Eleições 2026':'Urna Aberta · Elections 2026',
   'Apuração':'Results','Mapa por estado':'State map','Localidades':'Locations','Sobre os dados ↗':'About the data ↗','ELEIÇÕES':'ELECTIONS',
@@ -125,7 +133,7 @@ function captureStaticTranslations(){
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   let node;
   while((node=walker.nextNode())){
-    if(!node.parentElement.closest('script,style,svg,.brand,#candidates,#election-summary,#map-svg,#map-legend,#map-detail,#map-thead,#map-tbody,#total,#total-note,#scope,#notice,#checked,#status,#generated,#city,#uf,#states,#search-results,#map-updated')&&node.textContent.trim())staticText.push({node,source:node.textContent});
+    if(!node.parentElement.closest('script,style,svg,.brand,#candidates,#election-summary,#map-svg,#map-legend,#map-detail,#map-thead,#map-tbody,#post17-total,#post17-date,#total,#total-note,#scope,#notice,#checked,#status,#generated,#city,#uf,#states,#search-results,#map-updated')&&node.textContent.trim())staticText.push({node,source:node.textContent});
   }
   document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{
     for(const attribute of ['placeholder','aria-label','title'])if(el.hasAttribute(attribute))staticAttributes.push({el,attribute,source:el.getAttribute(attribute)});
